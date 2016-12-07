@@ -1,0 +1,24 @@
+{
+  "name": "csv_test",
+  "version": "1.0.0",
+  "description": "xuancat stats data test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weixingsun/csv_test_node.git"
+  },
+  "keywords": [
+    "node",
+    "csv"
+  ],
+  "author": "weixingsun",
+  "license": "MIT",
+  "homepage": "https://github.com/weixingsun/csv_test_node",
+  "dependencies": {
+    "alasql": "^0.3.4",
+    "csv-sql": "0.0.10"
+  }
+}
