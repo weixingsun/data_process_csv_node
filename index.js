@@ -125,7 +125,7 @@ var saveK = 'SELECT * INTO csv("K.csv",{headers:true,separator:","}) FROM ?'
 csv(selectK,[],function(k){  ////////////////////// K
   csv(saveK,[k],function(no){})
 })*/
-var selectD =
+/*var selectD =
   'select participant,age,sex,region,word,time_stamp, Ax,Ay,Bx,Byy,Cx,Cy, Dx, Cy - (Dx - Cx) / k as Dy from ('
   +'SELECT participant,age,sex,region,word,time_stamp, Ax,Ay,Bx,Byy,Cx,Cy, k, '
   +'(Cy - Ay + k * Ax + Cx / k) / (k + 1 / k) as Dx '
@@ -133,4 +133,37 @@ var selectD =
 var saveD = 'SELECT * INTO csv("ABCD.csv",{headers:true,separator:","}) FROM ?'
 csv(selectD,[],function(d){  ////////////////////// D
   csv(saveD,[d],function(no){})
+})*/
+
+/*var sqlRatio1 =
+  'select participant,age,sex,region,word,time_stamp, Ax,Ay,Bx,Byy,Cx,Cy, Dx,Dy, '
+  +'(Dx-Ax)/(Bx-Dx) as R1 '
+  +'FROM csv("ABCD.csv",{headers:true}) a'
+var saveRatio1 = 'SELECT * INTO csv("ABCD1.csv",{headers:true,separator:","}) FROM ?'
+csv(sqlRatio1,[],function(d){  ////////////////////// D
+  csv(saveRatio1,[d],function(no){})
+})*/
+
+/*alasql.fn.distance = function(x1,y1,x2,y2) {
+	var xdiff = x2 - x1;
+    var ydiff = y2 - y1;
+    return Math.pow((xdiff * xdiff + ydiff * ydiff), 0.5);
+}
+
+var sqlDist =
+  'select participant,age,sex,region,word,time_stamp, Ax,Ay,Bx,Byy,Cx,Cy, Dx,Dy, R1 as R_l2r, '
+  +'distance(Cx,Cy,Dx,Dy) as CD,distance(Ax,Ay,Bx,Byy) as AB '
+  +'FROM csv("ABCD1.csv",{headers:true}) a'
+var saveDist = 'SELECT * INTO csv("ABCD1_dist.csv",{headers:true,separator:","}) FROM ?'
+csv(sqlDist,[],function(d){  ////////////////////// D
+  csv(saveDist,[d],function(no){})
+})*/
+
+var sqlR_h2w =
+  'select participant,age,sex,region,word,time_stamp, Ax,Ay,Bx,Byy,Cx,Cy, Dx,Dy, R_l2r, '
+  +'CD/AB as R_h2w '
+  +'FROM csv("ABCD1_dist.csv",{headers:true}) a'
+var saveRR = 'SELECT * INTO csv("ABCDRR.csv",{headers:true,separator:","}) FROM ?'
+csv(sqlR_h2w,[],function(d){  ////////////////////// D
+  csv(saveRR,[d],function(no){})
 })
