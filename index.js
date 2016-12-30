@@ -26,7 +26,7 @@ var db = 'CREATE INDEXEDDB DATABASE IF NOT EXISTS stats;\
         });
     });
 */
-var sql2 = 
+/* var sql2 = 
    'SELECT participant,age,sex,region,word,time_stamp, '
    +'X_00 as Ax, Y_00 as Ay '
    +'FROM csv("test4.csv",{headers:true}) a '
@@ -47,7 +47,7 @@ var sql4 =
 var sqlFirst = 'SELECT * INTO csv("first.csv",{headers:true,separator:","}) FROM ?'
 var sqlA = 'SELECT * INTO csv("test4_a.csv",{headers:true,separator:","}) FROM ?'
 var sqlB = 'SELECT * INTO csv("test4_b.csv",{headers:true,separator:","}) FROM ?'
-var sqlC = 'SELECT * INTO csv("test4_c.csv",{headers:true,separator:","}) FROM ?'
+var sqlC = 'SELECT * INTO csv("test4_c.csv",{headers:true,separator:","}) FROM ?' */
 
 /********************************* not works yet
 var sqlABC = 
@@ -159,11 +159,20 @@ csv(sqlDist,[],function(d){  ////////////////////// D
   csv(saveDist,[d],function(no){})
 })*/
 
-var sqlR_h2w =
+/* var sqlR_h2w =
   'select participant,age,sex,region,word,time_stamp, Ax,Ay,Bx,Byy,Cx,Cy, Dx,Dy, R_l2r, '
   +'CD/AB as R_h2w '
   +'FROM csv("ABCD1_dist.csv",{headers:true}) a'
 var saveRR = 'SELECT * INTO csv("ABCDRR.csv",{headers:true,separator:","}) FROM ?'
 csv(sqlR_h2w,[],function(d){  ////////////////////// D
   csv(saveRR,[d],function(no){})
+}) */
+
+var sqlR_avg =
+  'select subject,participant,age,sex,region,word, avg(mci) '
+  +'FROM csv("tshape.csv",{headers:true}) a '
+  +'group by subject,participant,age,sex,region,word';
+var saveAvg = 'SELECT * INTO csv("mci_avg.csv",{headers:true,separator:","}) FROM ?'
+csv(sqlR_avg,[],function(d){  ////////////////////// avg
+  csv(saveAvg,[d],function(no){})
 })
